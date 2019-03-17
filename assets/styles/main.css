@@ -15,11 +15,11 @@
     z-index: 0;
 }
 
-.offers__item:hover .item__heart-full {
+.offers__item__hover__heart {
     opacity: 1;
 }
 
-.offers__item:hover .item__img-description {
+.offers__item__hover__description {
     opacity: 1;
     top: 297px;
 }

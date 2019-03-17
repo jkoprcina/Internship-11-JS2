@@ -13,7 +13,6 @@ let filterArraySleeveLength = [{type:"Short", count:"7667"},
 
 
 let allDropdownLists = document.querySelectorAll(".dropdown__list");
-console.log(allDropdownLists);
 let elementToAdd = "";
 for(let i = 0; i < allDropdownLists.length; i++){
     for(let j = 0; j < 3; j++){
@@ -80,4 +79,63 @@ for(let i = 0; i < arrayItemDescriptions.length; i++){
     divToAdd.appendChild(elementToAdd);
 }
 
+//THIRD, FOURTH && FIFTH TASK
+let arrayOfItems = document.querySelectorAll(".offers__item");
+let arrayOfDescriptions = document.querySelectorAll(".item__img-description");
+let arrayOfHearts = document.querySelectorAll(".item__heart-full");
+let arrayOfImg = document.querySelectorAll(".item__heart-full");
+let main = document.querySelector("main");
+let favouritesCounterSpan = document.createElement('span');
+let numberOfFavourites = 0;
 
+arrayOfHearts.forEach(function(item){
+    item.clicked = false;
+});
+
+for(let i = 0; i < arrayOfItems.length; i++){
+    //THIRD TASK
+    arrayOfItems[i].addEventListener("mouseover", function(event){
+        arrayOfDescriptions[i].style.opacity = 1;
+        arrayOfDescriptions[i].style.top = "297px";
+        arrayOfHearts[i].style.opacity = 1;
+    });
+
+    arrayOfItems[i].addEventListener("mouseleave", function(event){
+        arrayOfDescriptions[i].style.opacity = 0;
+        if(!arrayOfHearts[i].clicked){
+            arrayOfHearts[i].style.opacity = 0;
+        }
+    });
+
+    //FOURTH TASK
+    arrayOfHearts[i].addEventListener("click", function(event){
+        if(arrayOfHearts[i].clicked){
+            arrayOfHearts[i].style.opacity = 0;
+            arrayOfHearts[i].clicked = false;
+            numberOfFavourites--; 
+            manipulateSpan();
+        }
+        else{
+            arrayOfHearts[i].style.opacity = 1;
+            arrayOfHearts[i].clicked = true;
+            numberOfFavourites++; 
+            manipulateSpan();
+        }
+    }); 
+
+    //FIFTH TASK
+    arrayOfItems[i].addEventListener("click", function(event){
+        window.open(url('details.html'));     
+    });
+}
+
+function manipulateSpan(){
+    if(numberOfFavourites > 0){
+        favouritesCounterSpan.innerHTML = "Favourites " + numberOfFavourites;
+        favouritesCounterSpan.style.margin = "auto";
+        main.appendChild(favouritesCounterSpan);
+    }
+    else{
+        main.removeChild(favouritesCounterSpan);
+    }
+}
