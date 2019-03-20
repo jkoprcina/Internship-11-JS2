@@ -17,102 +17,43 @@ let filterArraySleeveLength = [
   { type: "Medium", count: "65" }
 ];
 
+let arrays = [ filterArraySort, filterArrayProductType, filterArraySleeveLength ]
+//Koristim niz u nizu umisto objecta zbog lakse iteracije kroz njega 
+
 let allDropdownLists = document.querySelectorAll(".dropdown__list");
 let elementToAdd = "";
-for (let i = 0; i < allDropdownLists.length; i++) {
-  for (let j = 0; j < 3; j++) {
-    if (i === 0) {
+arrays.forEach(function(array, index) {
+  array.forEach(function(item) {
       elementToAdd = document.createElement("li");
-      elementToAdd.innerHTML =
-        filterArraySort[j].type + " - " + filterArraySort[j].count;
+      elementToAdd.innerHTML =item.type + " - " + item.count;
       elementToAdd.classList.add("dropdown__list__item");
-      allDropdownLists[i].appendChild(elementToAdd);
-    } else if (i === 1) {
-      elementToAdd = document.createElement("li");
-      elementToAdd.innerHTML =
-        filterArrayProductType[j].type +
-        " - " +
-        filterArrayProductType[j].count;
-      elementToAdd.classList.add("dropdown__list__item");
-      allDropdownLists[i].appendChild(elementToAdd);
-    } else {
-      elementToAdd = document.createElement("li");
-      elementToAdd.innerHTML =
-        filterArraySleeveLength[j].type +
-        " - " +
-        filterArraySleeveLength[j].count;
-      elementToAdd.classList.add("dropdown__list__item");
-      allDropdownLists[i].appendChild(elementToAdd);
-    }
-  }
-}
+      allDropdownLists[index].appendChild(elementToAdd);
+  });
+});
 
 //SECOND TASK
-let imageMan = "assets/images/offer.jpg";
-let imageHeartEmpty = "./assets/images/heart-shape.png";
-let imageHeartFull = "./assets/images/heart-full.png";
-let arrayItemDescriptions = [
-  "Long",
-  "Short",
-  "Black",
-  "Small",
-  "WTF",
-  "Red",
-  "Blue",
-  "Green"
+let arrayInfo = [
+  {description: "Long", paragraph: "A very long shirt", price: "12.3£"},
+  {description: "Short", paragraph: "A very short shirt", price: "19£"},
+  {description: "Black", paragraph: "A very black shirt", price: "5.2£"},
+  {description: "Small", paragraph: "A very small shirt", price: "42.1£"},
+  {description: "WTF", paragraph: "A very WTF shirt", price: "32.5£"},
+  {description: "Red", paragraph: "A very red shirt", price: "333£"},
+  {description: "Blue", paragraph: "A very blue shirt", price: "45.2£"},
+  {description: "Green", paragraph: "A very green shirt", price: "FREE"}
 ];
-let arrayItemParagraphs = [
-  "A very long shirt",
-  "A very short shirt",
-  "A very black shirt",
-  "A very small shirt",
-  "A very WTF shirt",
-  "A very red shirt",
-  "A very blue shirt",
-  "A very green shirt"
-];
-let arrayPrices = [
-  "12.3£",
-  "19£",
-  "5.2£",
-  "42.1£",
-  "32.5£",
-  "333£",
-  "45.2£",
-  "FREE"
-];
-let whereToAddElements = document.querySelectorAll(".main__offers");
-let divToAdd = "";
+let whereToAddElements = document.querySelector(".main__offers");
 
-for (let i = 0; i < arrayItemDescriptions.length; i++) {
-  divToAdd = document.createElement("div");
-  divToAdd.classList.add("offers__item");
-  whereToAddElements[0].appendChild(divToAdd);
-  elementToAdd = document.createElement("img");
-  elementToAdd.src = imageMan;
-  elementToAdd.classList.add("item__img");
-  divToAdd.appendChild(elementToAdd);
-  elementToAdd = document.createElement("img");
-  elementToAdd.src = imageHeartEmpty;
-  elementToAdd.classList.add("item__heart-shape");
-  divToAdd.appendChild(elementToAdd);
-  elementToAdd = document.createElement("img");
-  elementToAdd.src = imageHeartFull;
-  elementToAdd.classList.add("item__heart-full");
-  divToAdd.appendChild(elementToAdd);
-  elementToAdd = document.createElement("p");
-  elementToAdd.innerHTML = arrayItemDescriptions[i];
-  elementToAdd.classList.add("item__img-description");
-  divToAdd.appendChild(elementToAdd);
-  elementToAdd = document.createElement("p");
-  elementToAdd.innerHTML = arrayItemParagraphs[i];
-  elementToAdd.classList.add("item__paragraph");
-  divToAdd.appendChild(elementToAdd);
-  elementToAdd = document.createElement("span");
-  elementToAdd.innerHTML = arrayPrices[i];
-  elementToAdd.classList.add("item__price");
-  divToAdd.appendChild(elementToAdd);
-}
+arrayInfo.forEach(function(item) {
+  whereToAddElements.innerHTML += `<div class ="offers__item">
+    <img class="item__img" src="./assets/images/offer.jpg"/>
+    <img class="item__heart-shape" src="./assets/images/heart-shape.png" />
+    <img class="item__heart-full" src="./assets/images/heart-full.png" />
+    <p class="item__img-description">${item.description}</p>
+    <p class="item__paragraph">${item.paragraph}</p>
+    <span class="item__price">${item.price}</span>
+  </div>`
+});
 
 //THIRD, FOURTH && FIFTH TASK
 let arrayOfItems = document.querySelectorAll(".offers__item");
